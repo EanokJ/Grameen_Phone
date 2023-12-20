@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextListener class="com.grameenphone.wipro.task_executor.util.LoggerStartupListener"/>
+
+    <appender name="NULL_LOG" class="ch.qos.logback.core.helpers.NOPAppender"/>
+
+    <appender name="HIBERNATE_LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %X{session} %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %X{session} %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TRACE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/trace.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %X{session} %logger{36}.%M - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.dir}/%d{dd-MM-yyyy}.log.gz</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.grameenphone" level="trace" additivity="false">
+        <appender-ref ref="TRACE_FILE"/>
+    </logger>
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="debug" additivity="false">
+        <appender-ref ref="TRACE_FILE"/>
+    </logger>
+    <logger name="org.hibernate" level="off" additivity="false">
+        <appender-ref ref="NULL_LOG"/>
+    </logger>
+    <logger name="org.hibernate.SQL" level="${hibernate.log.level.sql}" additivity="false">
+        <appender-ref ref="HIBERNATE_LOG"/>
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="${hibernate.log.level.param.binder}" additivity="false">
+        <appender-ref ref="HIBERNATE_LOG"/>
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="${hibernate.log.level.param.extractor}" additivity="false">
+        <appender-ref ref="HIBERNATE_LOG"/>
+    </logger>
+    <root level="${root.log.level}">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

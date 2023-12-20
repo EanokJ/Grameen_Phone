@@ -1,0 +1,32 @@
+#Database Configuration
+cbp_db_url=jdbc:mysql://localhost:3306/mflex_bulk_bill?autoReconnect=true&useSSL=false
+cbp_db_username=root
+cbp_db_password=root
+
+api_db_url=jdbc:mysql://localhost:3306/mflex_core?useSSL=false
+api_db_username=root
+api_db_password=root
+
+#API Configuration
+api_timeout=10
+api_due_bill_url=http://10.10.22.67:20000/mfs_communicator/bill/dues
+api_pay_bill_url=http://10.10.22.67:20000/mfs_communicator/bill/payment
+
+#Web app Configuration
+notification_due_bill=http://10.10.22.67:20000/cbbp/api/notification/billCollectionComplete
+notification_pay_bill=http://10.10.22.67:20000/cbbp/api/notification/paymentComplete
+
+#Mail Configuration
+email-notification-from=Corporate Bulk Bill Pay<gbp@grameenphone.com>
+email-notification-host=192.168.207.211
+email-template-due-bill=<p><strong>Dear $user>name$</strong>,</p><p>Your Bill Collection Request, requested on $task>creationTime$ with id <strong>#$request_id$</strong> completed with following status.</p><p style\="text-align\: left; padding-left\: 150px;">Started On\: <strong>$task>startTime$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Completed On\: <strong>$task>endTime$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Total Processed Bill Data\: <strong>$task>totalProcessed$</strong></p></p><p style\="text-align\: left; padding-left\: 150px;">Bill Collection Success For\: <strong>$task>successCount$</strong></p></p><p style\="text-align\: left; padding-left\: 150px;">Bill Collection Failed For\: <strong>$task>failedCount$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Total Collected Bill\: <strong>$bill_found$</strong></p><p>Kind Regards,<br />GPAY Team</p>
+subject-template-due-bill=Your requested bill refreshing is done
+email-template-pay-bill=<p><strong>Dear $user>name$</strong>,</p><p>Your bill payment requested on $task>create_time$ with id as <strong>$request_id$</strong> completed with following status.</p><p style\="text-align\: left; padding-left\: 150px;">Started On\: <strong>$task>start_time$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Completed On\: <strong>$task>end_time$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Total Bill Found\: <strong>$task>total_processed$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Success\: <strong>$task>success_count$</strong></p><p style\="text-align\: left; padding-left\: 150px;">Failed\: <strong>$task>failed_count$</strong></p><p style\="text-align\: left; padding-left\: 150px;">In Dispute\: <strong>$task>dispute_count$</strong></p><p>Kind Regards,<br />GPAY Team</p>
+subject-template-pay-bill=Your requested bill payment is completed
+
+log.dir=D:\\Yousuf\\Project\\Flex MFS\\Logs
+task_executor_node_id=249
+is_dispute_checker_node=true
+
+http.proxy.host=10.10.20.60
+http.proxy.port=80

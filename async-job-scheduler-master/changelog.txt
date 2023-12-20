@@ -1,0 +1,12 @@
+sqls
+====================================================
+ALTER TABLE company  ADD COLUMN bill_revertibles varchar(500) NULL  AFTER has_bill;
+UPDATE company SET bill_revertibles = 'BILL_MONTH,BILL_YEAR' WHERE code='BREB';
+
+CREATE TABLE IF NOT EXISTS bill_revertible_cache (
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	bill_id INT(11) NOT NULL,
+	values_as_json VARCHAR(2000) NOT NULL,
+	`insertion_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY(bill_id) REFERENCES bill(id)
+);
